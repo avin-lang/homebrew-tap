@@ -3,7 +3,7 @@ class Avin < Formula
   homepage "https://github.com/avin-lang/avin"
   # `scripts/release.sh <version>` writes this file into its output directory with the version and
   # the tarball's sha256 filled in; that copy is the one that goes into the tap.
-  version "0.0.2"
+  version "0.0.3"
 
   # macOS arm64 only: the tarball is built on the author's machine by the release script, which
   # proves it from where it was unpacked before it is published.
@@ -11,7 +11,7 @@ class Avin < Formula
   depends_on :macos
 
   url "https://github.com/avin-lang/avin/releases/download/v#{version}/avin-#{version}-darwin-arm64.tar.gz"
-  sha256 "237ac3f0aba2dc8352082387b3117e6d2f9f6de8343605d2cd4792f658bf4147"
+  sha256 "c000b92f806c2e5d279f0fb0a87b6dd14eb317ef348366a002f79f1e134865ba"
 
   # Run-time dependencies. avin links every program with clang, which Xcode's command-line tools
   # provide. The runtime's archive ships prebuilt, so a program that reaches no Sysl binding needs
@@ -20,10 +20,9 @@ class Avin < Formula
   # LLVM's archiver with it.
   depends_on "sysl-lang/tap/sysl"
 
-  # The standard library's file functions report a file standing where a directory would go as
-  # `NotADirectory`, which needs Sysl 0.8.17. A dependency cannot name a least version, so it is
-  # checked here.
-  MINIMUM_SYSL = "0.8.17".freeze
+  # A Sysl handle held in an `Option` or a `Result` is converted by a generic shim function that
+  # needs Sysl 0.8.18. A dependency cannot name a least version, so it is checked here.
+  MINIMUM_SYSL = "0.8.18".freeze
 
   def install
     sysl = Formula["sysl-lang/tap/sysl"]
@@ -47,8 +46,8 @@ class Avin < Formula
 
     (testpath/"hello.avin").write <<~AVIN
       main()
-          print("Hello, Avin!")
-          print(6 * 7)
+          println("Hello, Avin!")
+          println(6 * 7)
     AVIN
 
     # Drives the whole toolchain: the installed library, the shipped runtime archive, IR emission and
