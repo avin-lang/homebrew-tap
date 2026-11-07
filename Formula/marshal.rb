@@ -12,7 +12,8 @@ class Marshal < Formula
   sha256 "9461d10277506f6467e3b0109a04af42b2249b402594c1dbda9052d6575dc227"
 
   def install
-    prefix.install Dir["*"]
+    # The tarball holds only bin/marshal, and brew unpacks it from inside its one top directory.
+    bin.install "marshal"
   end
 
   test do
