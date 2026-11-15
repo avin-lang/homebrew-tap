@@ -11,7 +11,7 @@ class Marshal < Formula
   depends_on :macos
 
   url "https://github.com/avin-lang/marshal/releases/download/v#{version}/marshal-#{version}-darwin-arm64.tar.gz"
-  sha256 "9eef6feaabb0bde52ac93d68b682ab485d8bbd8ed5188f3fdcb83368c6236661"
+  sha256 "752a5b142fcad4720a560748b514a51b086c0398fccdf9b1c6ebeeb4b34aaeb2"
 
   def install
     # The tarball holds bin/marshal and share/marshal (the stock job types and steps), which the
@@ -23,5 +23,8 @@ class Marshal < Formula
   test do
     assert_match "usage: marshal", shell_output("#{bin}/marshal --help")
     assert_match "marshal #{version}", shell_output("#{bin}/marshal version")
+    # the stock job types and steps sit where the executable looks for them
+    assert_path_exists pkgshare/"types/train.job"
+    assert_path_exists pkgshare/"steps/git/main.avin"
   end
 end
