@@ -1,7 +1,7 @@
 class Marshal < Formula
   desc "Job manager for building, testing and releasing: a budget, a landing lane, learned deadlines"
   homepage "https://github.com/avin-lang/marshal"
-  version "0.3.13"
+  version "0.3.14"
 
   # macOS arm64 only: the executable is built with avin on the author's machine and links nothing
   # but the system library. marshal's stock steps are avin programs it compiles the first time a
@@ -11,7 +11,7 @@ class Marshal < Formula
   depends_on :macos
 
   url "https://github.com/avin-lang/marshal/releases/download/v#{version}/marshal-#{version}-darwin-arm64.tar.gz"
-  sha256 "24b1b8d222e41e8af0d34469c67b7d4e160e675172b7e89c85e40c25df01db46"
+  sha256 "4bfa4d0021e2f999ae0ad758ef3e10920af3365e3a069940cc3eaa0538123b07"
 
   def install
     # The tarball holds bin/marshal and share/marshal (the stock job types and steps), which the
