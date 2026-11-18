@@ -3,7 +3,7 @@ class Avin < Formula
   homepage "https://github.com/avin-lang/avin"
   # `scripts/release.sh <version>` writes this file into its output directory with the version and
   # the tarball's sha256 filled in; that copy is the one that goes into the tap.
-  version "0.0.31"
+  version "0.0.32"
 
   # macOS arm64 only: the tarball is built on the author's machine by the release script, which
   # proves it from where it was unpacked before it is published.
@@ -11,7 +11,7 @@ class Avin < Formula
   depends_on :macos
 
   url "https://github.com/avin-lang/avin/releases/download/v#{version}/avin-#{version}-darwin-arm64.tar.gz"
-  sha256 "449f339e9264cb10195b5eb029afbddae5df10a7807306593cb87a3d1012f487"
+  sha256 "c05da8a4178ee5806f44433548ea12253873c1b06a53e214e9c11c3c03e2b2fb"
 
   # Run-time dependencies. avin links every program with clang, which Xcode's command-line tools
   # provide. The runtime's archive ships prebuilt, so a program that reaches no Sysl binding needs
