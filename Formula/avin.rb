@@ -3,7 +3,7 @@ class Avin < Formula
   homepage "https://github.com/avin-lang/avin"
   # `scripts/release.sh <version>` writes this file into its output directory with the version and
   # the tarball's sha256 filled in; that copy is the one that goes into the tap.
-  version "0.0.39"
+  version "0.0.40"
 
   # macOS arm64 only: the tarball is built on the author's machine by the release script, which
   # proves it from where it was unpacked before it is published.
@@ -11,7 +11,7 @@ class Avin < Formula
   depends_on :macos
 
   url "https://github.com/avin-lang/avin/releases/download/v#{version}/avin-#{version}-darwin-arm64.tar.gz"
-  sha256 "d099177aa4bc9ddb6ffead9d0717e3287e841450e2fe8aa15f8b0d9a346a3a27"
+  sha256 "79576325cfc4e8f747164a5041d87586efac66a0eafad24c8ac947e46ce158e8"
 
   # Run-time dependencies. avin links every program with clang, which Xcode's command-line tools
   # provide. The runtime's archive ships prebuilt, so a program that reaches no Sysl binding needs
@@ -23,6 +23,11 @@ class Avin < Formula
   # TLS -- `avin.net.tls` and `https` in `avin.net.http` -- binds the Sysl package `openssl`, which
   # links the machine's OpenSSL, found by pkg-config, and trusts its certificate store.
   depends_on "openssl@3"
+
+  # `avin.compress` links the system zlib. macOS ships one; Linux takes it from here.
+  on_linux do
+    depends_on "zlib"
+  end
 
   # A collection out of Sysl is converted by two generic shim overloads, for a slice and a `Buf`,
   # that a program can reach at the same type argument, which needs Sysl 0.9.0; a handle passed to a
