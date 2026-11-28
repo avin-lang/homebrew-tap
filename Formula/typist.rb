@@ -13,7 +13,9 @@ class Typist < Formula
   sha256 "3d452a41510d34763c2c562f6173253a4fa135f9d5a5f71e38a7416955315369"
 
   def install
-    bin.install "bin/typist"
+    # The tarball holds bin/typist and nothing else, and brew unpacks an archive with one top-level
+    # directory inside that directory, so the executable is found here as `typist`.
+    bin.install "typist"
   end
 
   test do
